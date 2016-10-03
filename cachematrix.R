@@ -13,19 +13,19 @@
 makeCacheMatrix <- function(x = matrix()) {
   ## validate the input
   if(!is.matrix(x)){
-    x<-NULL;
+    x <- NULL
     warning("x is not a matrix, so setting x to null")
   }
   
   ## inv holds the cached inverse value, initially NULL
-  inv <- NULL;
+  inv <- NULL
   
   ## set a new value for the stored matrix m
   set<-function(xn){
     ## check type of xn
     if(!is.matrix(xn)){
       warning("new value is not a matrix, so won't apply it")
-      return;
+      return
     }
     
     ## check to see it the new value, xn is the same as the current value of x
@@ -78,7 +78,7 @@ cacheSolve <- function(x, ...) {
   }
   
   ## othersise calculate the inverse
-  ## and cache it on x useing x's setInverse function
+  ## and cache it on x using x's setInverse function
   m <- x$get()
   inv <- solve(m, ...)
   x$setInverse(inv)
