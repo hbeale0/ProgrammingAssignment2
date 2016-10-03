@@ -13,33 +13,33 @@
 makeCacheMatrix <- function(x = matrix()) {
   ## validate the input
   if(!is.matrix(x)){
-    x <- NULL
+    x <- NULL;
     warning("x is not a matrix, so setting x to null")
   }
   
   ## inv holds the cached inverse value, initially NULL
-  inv <- NULL
+  inv <- NULL;
   
-  ## set a new value for the stored matrix m
+  ## set a new value for the stored matrix x
   set<-function(xn){
     ## check type of xn
     if(!is.matrix(xn)){
       warning("new value is not a matrix, so won't apply it")
-      return
     }
-    
-    ## check to see it the new value, xn is the same as the current value of x
-    ## if it is there is no point reseting the cached inverse
-    iden <- is.matrix(x) && is.matrix(xn) && dim(x) == dim(xn) && all(x == xn)
-    
-    if(!iden){
-        ## set the value of x in the parent environment
-        ## using the <<- operator
-        x <<- xn
-        ## reset the value of inv in the parent environment 
-        inv <<- NULL   
-    } else {
-      message("new matrix value is identical, so not reseting")
+    else {
+        ## check to see it the new value, xn is the same as the current value of x
+        ## if not there is no point reseting the cached inverse
+        iden <- is.matrix(x) && is.matrix(xn) && dim(x) == dim(xn) && all(x == xn)
+        
+        if(!iden){
+          ## set the value of x in the parent environment
+          ## using the <<- operator
+          x <<- xn
+          ## reset the value of inv in the parent environment 
+          inv <<- NULL   
+        } else {
+          message("new matrix value is identical, so not reseting")
+        }
     }
   }
   
@@ -78,7 +78,7 @@ cacheSolve <- function(x, ...) {
   }
   
   ## othersise calculate the inverse
-  ## and cache it on x using x's setInverse function
+  ## and cache it on x useing x's setInverse function
   m <- x$get()
   inv <- solve(m, ...)
   x$setInverse(inv)
