@@ -29,7 +29,7 @@ makeCacheMatrix <- function(x = matrix()) {
     }
     
     ## check to see it the new value, xn is the same as the current value of x
-    ## if not there is no point reseting the cached inverse
+    ## if it is there is no point reseting the cached inverse
     iden <- is.matrix(x) && is.matrix(xn) && dim(x) == dim(xn) && all(x == xn)
     
     if(!iden){
